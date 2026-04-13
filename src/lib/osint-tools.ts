@@ -1,136 +1,97 @@
-export interface OsintTool {
-  name: string;
-  description: string;
-  href: string;
-  domain?: string;
-  badge?: string;
-}
+import { Camera, Users, Lock, Network, Map, Hash, Scan, FileSearch, Link } from 'lucide-react';
 
-export interface OsintToolSection {
+export type OsintCategory = {
   id: string;
   title: string;
-  description: string;
+  icon: any;
   tools: OsintTool[];
-}
+};
 
-export const osintToolSections: OsintToolSection[] = [
+export type OsintTool = {
+  name: string;
+  url: string;
+  desc: string;
+};
+
+export const OSINT_TOOLKIT: OsintCategory[] = [
   {
-    id: 'cctv',
-    title: 'CCTV and Live Cameras',
-    description: 'Jump into public webcam directories and live-scene discovery points.',
+    id: "cameras",
+    title: "Public CCTVs & Cameras",
+    icon: Camera,
     tools: [
-      {
-        name: 'EarthCam',
-        description: 'Public live cameras from cities, landmarks, and venues worldwide.',
-        href: 'https://www.earthcam.com/',
-        domain: 'earthcam.com',
-        badge: 'Live',
-      },
-      {
-        name: 'SkylineWebcams',
-        description: 'Tourism-heavy live feeds that are useful for weather and crowd checks.',
-        href: 'https://www.skylinewebcams.com/',
-        domain: 'skylinewebcams.com',
-        badge: 'Live',
-      },
-      {
-        name: 'Webcam Taxi',
-        description: 'Broad directory of public webcams by country and category.',
-        href: 'https://www.webcamtaxi.com/',
-        domain: 'webcamtaxi.com',
-      },
-      {
-        name: 'Insecam',
-        description: 'Open camera index for exposed IP cameras and CCTV endpoints.',
-        href: 'https://www.insecam.org/',
-        domain: 'insecam.org',
-        badge: 'Exposure',
-      },
-    ],
+      { name: "Insecam", url: "http://www.insecam.org/", desc: "Largest directory of online public security cameras." },
+      { name: "EarthCam", url: "https://www.earthcam.com/", desc: "Network of scenic webcams and streaming feeds." },
+      { name: "Shodan: SQ-WEBCAM", url: "https://www.shodan.io/search?query=Server%3A+SQ-WEBCAM", desc: "Discover exposed webcams globally." },
+      { name: "Open Network Cameras", url: "https://www.shodan.io/search?query=title%3A%22Network+Camera%22", desc: "Find open network cameras on Shodan." }
+    ]
   },
   {
-    id: 'maps',
-    title: 'Map and Geolocation Tools',
-    description: 'Map, satellite, and street-level tooling for location verification.',
+    id: "people",
+    title: "People & Identities",
+    icon: Users,
     tools: [
-      {
-        name: 'Google Maps',
-        description: 'Fast place search, business data, street view, and directions.',
-        href: 'https://www.google.com/maps',
-        domain: 'google.com',
-        badge: 'Maps',
-      },
-      {
-        name: 'OpenStreetMap',
-        description: 'Open geospatial map data with strong local detail and editing history.',
-        href: 'https://www.openstreetmap.org/',
-        domain: 'openstreetmap.org',
-        badge: 'Open',
-      },
-      {
-        name: 'Mapillary',
-        description: 'Crowdsourced street-level imagery for signage, roads, and storefronts.',
-        href: 'https://www.mapillary.com/app/',
-        domain: 'mapillary.com',
-        badge: 'Street',
-      },
-      {
-        name: 'OpenAerialMap',
-        description: 'Open aerial imagery discovery for terrain and overhead context.',
-        href: 'https://openaerialmap.org/',
-        domain: 'openaerialmap.org',
-      },
-      {
-        name: 'Zoom Earth',
-        description: 'Near-real-time weather, wildfire, and satellite overlays.',
-        href: 'https://zoom.earth/',
-        domain: 'zoom.earth',
-        badge: 'Satellite',
-      },
-      {
-        name: 'SunCalc',
-        description: 'Sun angle and shadow estimation for photo and video geolocation.',
-        href: 'https://www.suncalc.org/',
-        domain: 'suncalc.org',
-      },
-    ],
+      { name: "Epios", url: "https://epios.com/", desc: "Reverse email search and Google Account enumeration." },
+      { name: "WhatsMyName", url: "https://whatsmyname.app/", desc: "Enumerate usernames across hundreds of websites." },
+      { name: "TruePeopleSearch", url: "https://www.truepeoplesearch.com/", desc: "Free public records directory (US)." },
+      { name: "Webmii", url: "https://webmii.com/", desc: "People search evaluating public web presence." },
+      { name: "Sherlock", url: "https://github.com/sherlock-project/sherlock", desc: "Hunt down social media accounts by username." }
+    ]
   },
   {
-    id: 'tracking',
-    title: 'Movement and Infrastructure',
-    description: 'Track aircraft, vessels, transport layers, and environmental conditions.',
+    id: "breaches",
+    title: "Breaches & Passwords",
+    icon: Lock,
     tools: [
-      {
-        name: 'ADS-B Exchange',
-        description: 'Live air traffic map for aircraft tracing and timeline correlation.',
-        href: 'https://globe.adsbexchange.com/',
-        domain: 'adsbexchange.com',
-        badge: 'Aviation',
-      },
-      {
-        name: 'MarineTraffic',
-        description: 'Vessel positions, ports, and maritime movement visibility.',
-        href: 'https://www.marinetraffic.com/',
-        domain: 'marinetraffic.com',
-        badge: 'Marine',
-      },
-      {
-        name: 'OpenRailwayMap',
-        description: 'Rail infrastructure overlays useful for transit and route analysis.',
-        href: 'https://www.openrailwaymap.org/',
-        domain: 'openrailwaymap.org',
-      },
-      {
-        name: 'Windy',
-        description: 'Weather, cloud, rain, and forecast overlays for event reconstruction.',
-        href: 'https://www.windy.com/',
-        domain: 'windy.com',
-        badge: 'Weather',
-      },
-    ],
+      { name: "HaveIBeenPwned", url: "https://haveibeenpwned.com/", desc: "Check if an email or phone is in a data breach." },
+      { name: "DeHashed", url: "https://dehashed.com/", desc: "Advanced database of leaked credentials." },
+      { name: "LeakIX", url: "https://leakix.net/", desc: "Search engine indexing public data leaks and open databases." },
+      { name: "BreachDirectory", url: "https://breachdirectory.org/", desc: "Search through public data breaches." }
+    ]
   },
+  {
+    id: "network",
+    title: "Network & Infrastructure",
+    icon: Network,
+    tools: [
+      { name: "Shodan", url: "https://www.shodan.io/", desc: "Search engine for Internet-connected devices." },
+      { name: "Censys", url: "https://search.censys.io/", desc: "Platform for discovering infrastructure and attack surfaces." },
+      { name: "DNSDumpster", url: "https://dnsdumpster.com/", desc: "DNS reconnaissance and mapping tool." },
+      { name: "ViewDNS.info", url: "https://viewdns.info/", desc: "Huge collection of DNS and network tools." },
+      { name: "BGPView", url: "https://bgpview.io/", desc: "Search ASNs, IPv4/IPv6 prefixes, and BGP routing." }
+    ]
+  },
+  {
+    id: "imagery",
+    title: "Imagery & Geo",
+    icon: Map,
+    tools: [
+      { name: "TinEye", url: "https://tineye.com/", desc: "Reverse image search engine." },
+      { name: "Overpass Turbo", url: "https://overpass-turbo.eu/", desc: "Advanced OSM querying tool for precise geo-location." },
+      { name: "Snap Map", url: "https://map.snapchat.com/", desc: "Live global map of public Snapchat stories." },
+      { name: "SunCalc", url: "https://www.suncalc.org/", desc: "Calculate sun path and shadows for chronolocation." },
+      { name: "FlightRadar24", url: "https://www.flightradar24.com/", desc: "Live global flight tracking map." },
+      { name: "MarineTraffic", url: "https://www.marinetraffic.com/", desc: "Live global ship tracking map." }
+    ]
+  },
+  {
+    id: "social",
+    title: "Social Media Intelligence",
+    icon: Hash,
+    tools: [
+      { name: "Social-Searcher", url: "https://www.social-searcher.com/", desc: "Free social media search engine." },
+      { name: "X (Twitter) Advanced", url: "https://twitter.com/search-advanced", desc: "Advanced querying for X/Twitter." },
+      { name: "Twint (Fork)", url: "https://github.com/twintproject/twint", desc: "Advanced Twitter scraping tool." },
+      { name: "TikTok Search", url: "https://www.tiktok.com/search", desc: "Native TikTok search engine." }
+    ]
+  },
+  {
+    id: "docs",
+    title: "Documents & Files",
+    icon: FileSearch,
+    tools: [
+      { name: "FOCA", url: "https://github.com/ElevenPaths/FOCA", desc: "Extract hidden metadata from documents." },
+      { name: "ExifTool", url: "https://exiftool.org/", desc: "Read, write, and edit meta information in files." },
+      { name: "FilePursuit", url: "https://filepursuit.com/", desc: "Discover public files and directories across the web." }
+    ]
+  }
 ];
-
-export function buildDomainSearchUrl(domain: string, query: string) {
-  return `https://www.google.com/search?q=${encodeURIComponent(`site:${domain} ${query}`)}`;
-}

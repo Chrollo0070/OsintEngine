@@ -1,116 +1,57 @@
 'use client';
 
-import Link from 'next/link';
-import { ExternalLink, MapPinned, Radar, Search, Shield, Video } from 'lucide-react';
-import { buildDomainSearchUrl, osintToolSections } from '@/lib/osint-tools';
+import React from 'react';
+import { OSINT_TOOLKIT } from '@/lib/osint-tools';
+import { ExternalLink, ShieldAlert } from 'lucide-react';
 
 interface OsintSidebarProps {
   query?: string;
-  compact?: boolean;
+  className?: string;
 }
 
-const sectionIcons = {
-  cctv: Video,
-  maps: MapPinned,
-  tracking: Radar,
-} as const;
-
-export function OsintSidebar({ query = '', compact = false }: OsintSidebarProps) {
-  const trimmedQuery = query.trim();
-
+export function OsintSidebar({ query, className = '' }: OsintSidebarProps) {
   return (
-    <aside className="w-full rounded-[28px] border border-zinc-800/80 bg-zinc-950/80 p-5 shadow-2xl shadow-emerald-950/10 backdrop-blur">
-      <div className="mb-5 flex items-start justify-between gap-4">
-        <div>
-          <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.24em] text-emerald-300">
-            <Shield className="h-3.5 w-3.5" />
-            OSINT Toolkit
-          </p>
-          <h2 className="text-xl font-semibold tracking-tight text-zinc-100">
-            CCTV, maps, and field intel
-          </h2>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-zinc-400">
-            Quick-launch tools for location checks, live feeds, terrain validation, and movement analysis.
-          </p>
-        </div>
-
-        {!compact && (
-          <Link
-            href={trimmedQuery ? `/search?q=${encodeURIComponent(trimmedQuery)}` : '/search'}
-            className="hidden shrink-0 rounded-full border border-zinc-800 bg-black px-3 py-1.5 text-xs font-mono text-zinc-300 transition-colors hover:border-emerald-500/40 hover:text-emerald-300 md:inline-flex"
-          >
-            Search workspace
-          </Link>
-        )}
+    <aside className={`w-full bg-zinc-950/50 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col h-full ${className}`}>
+      <div className="p-5 border-b border-zinc-800 bg-zinc-950/80 sticky top-0 z-10 backdrop-blur-sm">
+        <h2 className="text-emerald-400 font-mono font-semibold tracking-tight flex items-center gap-2">
+          <ShieldAlert className="h-4 w-4" /> 
+          OSINT TOOLKIT
+        </h2>
+        <p className="text-zinc-500 text-xs mt-2 leading-relaxed">
+          Quick-access intelligence resources. Select a tool to open it in a new perimeter.
+        </p>
       </div>
 
-      <div className="space-y-4">
-        {osintToolSections.map((section) => {
-          const Icon = sectionIcons[section.id as keyof typeof sectionIcons] ?? Search;
-
+      <div className="p-4 overflow-y-auto custom-scrollbar flex-1 space-y-6">
+        {OSINT_TOOLKIT.map((category) => {
+          const Icon = category.icon;
           return (
-            <section
-              key={section.id}
-              className="rounded-2xl border border-zinc-800/70 bg-black/40 p-4"
-            >
-              <div className="mb-4 flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-950">
-                  <Icon className="h-4 w-4 text-emerald-400" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-zinc-100">{section.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-500">
-                    {section.description}
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                {section.tools.map((tool) => (
-                  <div
-                    key={tool.name}
-                    className="rounded-2xl border border-zinc-800/70 bg-zinc-950/70 p-3 transition-colors hover:border-zinc-700"
-                  >
-                    <div className="mb-2 flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-zinc-100">{tool.name}</span>
-                        {tool.badge && (
-                          <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-300">
-                            {tool.badge}
-                          </span>
-                        )}
+            <div key={category.id} className="space-y-3">
+              <h3 className="text-zinc-300 text-sm font-semibold flex items-center gap-2 border-b border-zinc-800/50 pb-2">
+                <Icon className="h-4 w-4 text-emerald-500/70" />
+                {category.title}
+              </h3>
+              <ul className="space-y-2">
+                {category.tools.map((tool) => (
+                  <li key={tool.name}>
+                    <a
+                      href={tool.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-2 -mx-2 rounded-lg hover:bg-zinc-900 transition-colors"
+                    >
+                      <div className="flex items-center justify-between text-zinc-300 text-sm font-medium group-hover:text-emerald-400 transition-colors">
+                        <span>{tool.name}</span>
+                        <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
-                    </div>
-
-                    <p className="text-xs leading-relaxed text-zinc-500">{tool.description}</p>
-
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <a
-                        href={tool.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-black px-3 py-1.5 text-xs font-mono text-zinc-300 transition-colors hover:border-emerald-500/40 hover:text-emerald-300"
-                      >
-                        Open tool
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-
-                      {trimmedQuery && tool.domain && (
-                        <a
-                          href={buildDomainSearchUrl(tool.domain, trimmedQuery)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 px-3 py-1.5 text-xs font-mono text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
-                        >
-                          Search "{trimmedQuery}"
-                          <Search className="h-3 w-3" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                      <p className="text-zinc-500 text-xs mt-1 line-clamp-2">
+                        {tool.desc}
+                      </p>
+                    </a>
+                  </li>
                 ))}
-              </div>
-            </section>
+              </ul>
+            </div>
           );
         })}
       </div>

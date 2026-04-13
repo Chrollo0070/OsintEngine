@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { SearchBar } from '@/components/SearchBar';
 import { ResultsTabs } from '@/components/ResultsTabs';
 import { SkeletonLoader } from '@/components/SkeletonLoader';
+import { OsintSidebar } from '@/components/OsintSidebar';
 import { Terminal } from 'lucide-react';
 
 export const metadata = {
@@ -47,18 +48,26 @@ export default async function SearchPage({
             Enter a query above to start reconnaissance.
           </div>
         ) : (
-          <Suspense fallback={
-            <div className="space-y-6">
-              <div className="flex gap-2 mb-8">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <SkeletonLoader key={i} type="text" className="w-24 h-10 rounded-full inline-block" />
-                ))}
-              </div>
-              <SkeletonLoader type="card" className="h-[500px]" />
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8 items-start">
+            <div className="xl:col-span-3 min-w-0">
+              <Suspense fallback={
+                <div className="space-y-6">
+                  <div className="flex gap-2 mb-8">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <SkeletonLoader key={i} type="text" className="w-24 h-10 rounded-full inline-block" />
+                    ))}
+                  </div>
+                  <SkeletonLoader type="card" className="h-[500px]" />
+                </div>
+              }>
+                <ResultsTabs query={query} />
+              </Suspense>
             </div>
-          }>
-            <ResultsTabs query={query} />
-          </Suspense>
+            
+            <div className="xl:col-span-1 hidden xl:block sticky top-[88px] h-[calc(100vh-120px)]">
+              <OsintSidebar query={query} />
+            </div>
+          </div>
         )}
       </main>
     </div>
