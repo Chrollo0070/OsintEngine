@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { SearchResult } from '@/lib/google';
 import { SkeletonLoader } from './SkeletonLoader';
-import { ExternalLink, Search as SearchIcon, AlertTriangle } from 'lucide-react';
+import { Search as SearchIcon, AlertTriangle } from 'lucide-react';
 
 interface GeneralResultsProps {
   query: string;
@@ -60,7 +60,7 @@ export function GeneralResults({ query }: GeneralResultsProps) {
           <div className="bg-yellow-500/10 border border-yellow-500/20 text-yellow-500/90 rounded-lg p-3 text-sm flex items-start gap-2 font-mono">
             <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
             <span>
-              <strong>Using DuckDuckGo Instant Answer fallback.</strong> Since you haven't provided a Google Custom Search API Key yet, we default to DuckDuckGo's free Instant Answer API—which only returns hits for famous entities (like celebrities, big brands, definitions). To get full web results here like a normal search engine, please configure a free Google CSE key!
+              <strong>Using DuckDuckGo Instant Answer fallback.</strong> Since you haven&apos;t provided a Google Custom Search API Key yet, we default to DuckDuckGo&apos;s free Instant Answer API—which only returns hits for famous entities (like celebrities, big brands, definitions). To get full web results here like a normal search engine, please configure a free Google CSE key!
             </span>
           </div>
         )}
@@ -68,7 +68,7 @@ export function GeneralResults({ query }: GeneralResultsProps) {
           <SearchIcon className="h-10 w-10 text-zinc-600 mb-3" />
           <h3 className="text-zinc-300 font-medium mb-1">No Web Results Found</h3>
           <p className="text-zinc-500 text-sm">
-            Could not find any standard indexed search results for "{query}". 
+            Could not find any standard indexed search results for &quot;{query}&quot;.
             <br />
             Check out the <strong>Dorks</strong> tab to generate advanced search strings instead.
           </p>
@@ -95,7 +95,6 @@ export function GeneralResults({ query }: GeneralResultsProps) {
           className="group block"
         >
           <div className="flex items-center gap-3 mb-1.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <div className="h-6 w-6 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden flex-shrink-0">
               {result.favicon ? (
                 /* eslint-disable-next-line @next/next/no-img-element */

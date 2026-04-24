@@ -20,7 +20,7 @@ export function GeoToolkitPanel({ query }: GeoToolkitPanelProps) {
               Geo Toolkit
             </p>
             <h2 className="text-2xl font-semibold tracking-tight text-zinc-100">
-              CCTV and map-focused OSINT for "{query}"
+              CCTV and map-focused OSINT for &quot;{query}&quot;
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
               Use these launch points to verify locations, inspect live scenes, compare street-level imagery, and correlate transport or weather activity.

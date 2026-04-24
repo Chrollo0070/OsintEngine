@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Search, X } from 'lucide-react';
 
 interface SearchBarProps {
@@ -12,16 +12,7 @@ interface SearchBarProps {
 
 export function SearchBar({ initialValue = '', autoFocus = false, centered = false }: SearchBarProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [query, setQuery] = useState(initialValue);
-
-  // Sync state with URL if initialValue isn't provided directly
-  useEffect(() => {
-    if (!initialValue) {
-      const q = searchParams.get('q');
-      if (q) setQuery(q);
-    }
-  }, [searchParams, initialValue]);
 
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -29,8 +20,6 @@ export function SearchBar({ initialValue = '', autoFocus = false, centered = fal
 
     router.push(`/search?q=${encodeURIComponent(query.trim())}`);
   };
-
-  const currentQuery = searchParams.get('q') || initialValue;
 
   return (
     <form 

@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
-import { Globe, Image as ImageIcon, Database, BookOpen, Code, MapPinned } from 'lucide-react';
+import { Globe, Image as ImageIcon, Database, BookOpen, Code, MapPinned, UserRoundSearch } from 'lucide-react';
 import { DorkEngine } from './DorkEngine';
 import { WikiPanel } from './WikiPanel';
 import { GitHubPanel } from './GitHubPanel';
 import { ImageGrid } from './ImageGrid';
 import { GeneralResults } from './GeneralResults';
 import { GeoToolkitPanel } from './GeoToolkitPanel';
+import { UsernamePivotPanel } from './UsernamePivotPanel';
 
 interface ResultsTabsProps {
   query: string;
@@ -27,6 +28,12 @@ export function ResultsTabs({ query }: ResultsTabsProps) {
               className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-zinc-950 data-[state=active]:text-emerald-400 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-zinc-800"
             >
               <Database className="h-4 w-4 mr-2" /> Dorks
+            </TabsTrigger>
+            <TabsTrigger 
+              value="pivot" 
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-zinc-950 data-[state=active]:text-emerald-400 data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-zinc-800"
+            >
+              <UserRoundSearch className="h-4 w-4 mr-2" /> Pivot
             </TabsTrigger>
             <TabsTrigger 
               value="all" 
@@ -68,6 +75,10 @@ export function ResultsTabs({ query }: ResultsTabsProps) {
 
       <TabsContent value="all" className="min-h-[500px] outline-none">
         <GeneralResults query={query} />
+      </TabsContent>
+
+      <TabsContent value="pivot" className="min-h-[500px] outline-none">
+        <UsernamePivotPanel query={query} />
       </TabsContent>
       
       <TabsContent value="images" className="min-h-[500px] outline-none">

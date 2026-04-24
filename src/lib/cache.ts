@@ -1,15 +1,15 @@
 import { LRUCache } from 'lru-cache';
 
-const cache = new LRUCache<string, unknown>({
+const cache = new LRUCache<string, object>({
   max: 100,
   ttl: 1000 * 60 * 5, // 5 minutes
 });
 
-export function getCached<T>(key: string): T | undefined {
+export function getCached<T extends object>(key: string): T | undefined {
   return cache.get(key) as T | undefined;
 }
 
-export function setCache<T>(key: string, value: T): void {
+export function setCache<T extends object>(key: string, value: T): void {
   cache.set(key, value);
 }
 

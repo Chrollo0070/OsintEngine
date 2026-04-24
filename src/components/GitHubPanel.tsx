@@ -70,7 +70,7 @@ export function GitHubPanel({ query }: GitHubPanelProps) {
         <Code className="h-10 w-10 text-zinc-600 mb-3" />
         <h3 className="text-zinc-300 font-medium mb-1">No GitHub Intelligence Found</h3>
         <p className="text-zinc-500 text-sm">
-          No matching users or repositories found for "{query}".
+          No matching users or repositories found for &quot;{query}&quot;.
         </p>
       </div>
     );
