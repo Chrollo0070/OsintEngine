@@ -1,9 +1,18 @@
-import { Camera, Users, Lock, Network, Map, Hash, Scan, FileSearch, Link } from 'lucide-react';
+import {
+  Camera,
+  Users,
+  Lock,
+  Network,
+  Map,
+  Hash,
+  FileSearch,
+  type LucideIcon,
+} from 'lucide-react';
 
 export type OsintCategory = {
   id: string;
   title: string;
-  icon: any;
+  icon: LucideIcon;
   tools: OsintTool[];
 };
 
@@ -95,3 +104,109 @@ export const OSINT_TOOLKIT: OsintCategory[] = [
     ]
   }
 ];
+
+export type OsintSectionTool = {
+  name: string;
+  description: string;
+  href: string;
+  badge?: string;
+  domain?: string;
+};
+
+export type OsintToolSection = {
+  id: string;
+  title: string;
+  description: string;
+  tools: OsintSectionTool[];
+};
+
+export const osintToolSections: OsintToolSection[] = [
+  {
+    id: 'live-cameras',
+    title: 'Live Cameras & Street View',
+    description: 'Open-source camera directories and map feeds for quick visual verification.',
+    tools: [
+      {
+        name: 'Insecam',
+        description: 'Search public camera feeds by country, city, and camera type.',
+        href: 'http://www.insecam.org/',
+        badge: 'LIVE',
+        domain: 'insecam.org',
+      },
+      {
+        name: 'EarthCam',
+        description: 'Curated scenic and urban live webcams around the world.',
+        href: 'https://www.earthcam.com/',
+        domain: 'earthcam.com',
+      },
+      {
+        name: 'Google Maps',
+        description: 'Pivot to street view, landmarks, and route context around the target.',
+        href: 'https://www.google.com/maps',
+        domain: 'google.com',
+      },
+    ],
+  },
+  {
+    id: 'transport-weather',
+    title: 'Transport & Environmental Context',
+    description: 'Correlate events with aircraft, vessel, and weather activity.',
+    tools: [
+      {
+        name: 'FlightRadar24',
+        description: 'Inspect historical and live aircraft movement near a target location.',
+        href: 'https://www.flightradar24.com/',
+        domain: 'flightradar24.com',
+      },
+      {
+        name: 'MarineTraffic',
+        description: 'Track vessel movement and maritime patterns.',
+        href: 'https://www.marinetraffic.com/',
+        domain: 'marinetraffic.com',
+      },
+      {
+        name: 'SunCalc',
+        description: 'Estimate shadow direction and time-of-day from imagery.',
+        href: 'https://www.suncalc.org/',
+        badge: 'TIME',
+        domain: 'suncalc.org',
+      },
+    ],
+  },
+  {
+    id: 'domain-recon',
+    title: 'Domain Recon',
+    description: 'Discover related infrastructure and exposed assets tied to a domain.',
+    tools: [
+      {
+        name: 'Shodan',
+        description: 'Find exposed internet-facing services and cameras.',
+        href: 'https://www.shodan.io/',
+        badge: 'INFRA',
+        domain: 'shodan.io',
+      },
+      {
+        name: 'Censys',
+        description: 'Search indexed certificates, hosts, and internet infrastructure.',
+        href: 'https://search.censys.io/',
+        domain: 'search.censys.io',
+      },
+      {
+        name: 'DNSDumpster',
+        description: 'Map subdomains and DNS relationships.',
+        href: 'https://dnsdumpster.com/',
+        domain: 'dnsdumpster.com',
+      },
+    ],
+  },
+];
+
+export function buildDomainSearchUrl(domain: string, query: string): string {
+  const trimmedDomain = domain.trim();
+  const trimmedQuery = query.trim();
+  const searchQuery = trimmedQuery
+    ? `site:${trimmedDomain} ${trimmedQuery}`
+    : `site:${trimmedDomain}`;
+
+  return `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+}

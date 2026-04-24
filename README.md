@@ -78,6 +78,57 @@ Deploying PHANTOM is seamless with Vercel using their free Hobby plan.
 - `components/` - Radix powered accessible UI components.
 - `lib/` - Internal intelligence gathering modules.
 
+## Advanced Module Roadmap (Investigator Workflow)
+
+The following modules define the planned investigator-first workflow for PHANTOM:
+
+1. **Username Pivot Engine**
+   - Input a username and search linked profiles across GitHub, Reddit, X, Instagram, TikTok.
+   - Correlate reused usernames.
+   - Confidence scoring for matches.
+2. **Domain Attack Surface Mapper**
+   - Subdomains, DNS records, tech stack fingerprinting.
+   - Exposed services summary.
+   - Visual relationship graph.
+3. **Email Breach & Exposure Checker**
+   - Check public breach sources.
+   - Detect exposed credentials mentions.
+   - Password reuse risk indicators.
+4. **AI Investigation Assistant**
+   - Natural language query support (for example: *"Investigate this domain"*).
+   - Suggest next pivots automatically.
+   - Summarize findings into a report.
+5. **Link Analysis Graph View**
+   - Nodes for people, domains, emails, IPs.
+   - Interactive graph for pivoting.
+6. **IOC Enrichment Module**
+   - Input IP/hash/domain.
+   - Enrich with reputation, geolocation, and malware context.
+7. **Screenshot & Evidence Vault**
+   - Save findings as evidence packages.
+   - Export PDF/JSON case files.
+8. **Passive Phone OSINT Module** *(legal public sources only)*
+   - Carrier/region metadata.
+   - Public footprint discovery.
+9. **Investigation Timeline Builder**
+   - Turn artifacts into chronological events.
+10. **OPSEC / Risk Scoring**
+    - Warn users when queries may be noisy or legally sensitive.
+
+### Suggested Delivery Phases
+
+- **Phase 1:** Username Pivot Engine + Link Analysis Graph View + Domain Attack Surface Mapper
+- **Phase 2:** IOC Enrichment Module + Screenshot & Evidence Vault
+- **Phase 3:** AI Investigation Assistant
+
+### Stretch Ideas
+
+- Browser extension collector
+- Dark web mention monitoring *(if compliant)*
+- Multi-source report generation
+
+Suggested tracking labels: `enhancement`, `roadmap`.
+
 ## Security
 
 PHANTOM includes multiple security primitives including server-side secret obfuscation, request sanitization, and IP-level route rate limiting directly integrated in the core routing components.

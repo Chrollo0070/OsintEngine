@@ -49,7 +49,7 @@ export function WikiPanel({ query }: WikiPanelProps) {
         <BookOpen className="h-10 w-10 text-zinc-600 mb-3" />
         <h3 className="text-zinc-300 font-medium mb-1">No Wikipedia Data Found</h3>
         <p className="text-zinc-500 text-sm max-w-md">
-          Could not find a Wikipedia page exactly matching "{query}". Try searching for specific names or well-known entities.
+          Could not find a Wikipedia page exactly matching &quot;{query}&quot;. Try searching for specific names or well-known entities.
         </p>
       </div>
     );

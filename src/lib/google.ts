@@ -100,8 +100,8 @@ export async function googleImageSearch(query: string): Promise<ImageResult[]> {
       throw new Error(`Google API error: ${res.status}`);
     }
 
-    const data = await res.json();
-    return (data.items || []).map((item: any, index: number) => ({
+    const data = (await res.json()) as { items?: GoogleImageItem[] };
+    return (data.items || []).map((item, index: number) => ({
       id: `img-${index}-${Date.now()}`,
       width: item.image?.width || 800,
       height: item.image?.height || 600,
@@ -114,4 +114,16 @@ export async function googleImageSearch(query: string): Promise<ImageResult[]> {
   } catch {
     return [];
   }
+}
+
+interface GoogleImageItem {
+  title: string;
+  link: string;
+  displayLink: string;
+  image?: {
+    width?: number;
+    height?: number;
+    thumbnailLink?: string;
+    contextLink?: string;
+  };
 }

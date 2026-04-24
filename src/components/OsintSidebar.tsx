@@ -20,6 +20,11 @@ export function OsintSidebar({ query, className = '' }: OsintSidebarProps) {
         <p className="text-zinc-500 text-xs mt-2 leading-relaxed">
           Quick-access intelligence resources. Select a tool to open it in a new perimeter.
         </p>
+        {query ? (
+          <p className="mt-2 text-[11px] font-mono text-zinc-400">
+            Active target: <span className="text-emerald-300">{query}</span>
+          </p>
+        ) : null}
       </div>
 
       <div className="p-4 overflow-y-auto custom-scrollbar flex-1 space-y-6">

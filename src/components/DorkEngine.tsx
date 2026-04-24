@@ -49,7 +49,7 @@ export function DorkEngine({ query }: DorkEngineProps) {
             Dork Engine
           </h2>
           <p className="text-sm text-zinc-400 mt-1 font-mono">
-            Pre-configured search operators for "{query}"
+            Pre-configured search operators for &quot;{query}&quot;
           </p>
         </div>
         <div className="flex gap-2">
