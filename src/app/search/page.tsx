@@ -35,7 +35,7 @@ export default async function SearchPage({
 
           <div className="flex-1 max-w-3xl">
             <Suspense fallback={<div className="h-10 bg-zinc-900 rounded-xl animate-pulse" />}>
-              <SearchBar initialValue={query} />
+              <SearchBar key={query} initialValue={query} />
             </Suspense>
           </div>
         </div>
