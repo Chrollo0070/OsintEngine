@@ -78,7 +78,7 @@ export function buildUsernamePivotFindings(rawInput: string): UsernamePivotFindi
       profileUrl,
       searchUrl,
       confidence: 'medium',
-      evidence: `Exact-handle profile hypothesis generated from the provided username on ${platform.name}.`,
+      evidence: `Exact handle profile hypothesis generated from the provided username on ${platform.name}.`,
     };
   });
 }
