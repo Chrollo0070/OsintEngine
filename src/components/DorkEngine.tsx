@@ -16,9 +16,9 @@ interface DorkEngineProps {
 export function DorkEngine({ query }: DorkEngineProps) {
   const categories = useMemo(() => getDorkCategories(query), [query]);
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(() => {
-    // Open first 3 by default
+    // Open all by default
     const initial: Record<string, boolean> = {};
-    categories.slice(0, 3).forEach(c => { initial[c.name] = true; });
+    categories.forEach(c => { initial[c.name] = true; });
     return initial;
   });
 
