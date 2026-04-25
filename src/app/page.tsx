@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { SearchBar } from '@/components/SearchBar';
 import { ShieldAlert, Terminal } from 'lucide-react';
 
@@ -26,7 +27,9 @@ export default function Home() {
         </div>
 
         <div className="w-full max-w-2xl px-4 animate-in slide-in-from-bottom-6 duration-700 delay-150">
-          <SearchBar centered autoFocus />
+          <Suspense fallback={<div className="h-14 w-full bg-zinc-900 rounded-2xl animate-pulse" />}>
+            <SearchBar centered autoFocus />
+          </Suspense>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mt-16 animate-in slide-in-from-bottom-8 duration-700 delay-300 text-left">
