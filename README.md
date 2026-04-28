@@ -61,7 +61,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deployment
+## Deployment ##
 
 Deploying PHANTOM is seamless with Vercel using their free Hobby plan.
 
