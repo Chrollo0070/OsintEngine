@@ -1,4 +1,4 @@
-# PHANTOM — Advanced OSINT Intelligence Suite
+# PHANTOM — Advanced OSINT Intelligence Suite.
 
 PHANTOM is a production-grade, highly-optimized Open Source Intelligence (OSINT) suite designed for speed and reliability. Built entirely on free-tier APIs, it offers a zero-cost solution for extensive reconnaissance. 
 
@@ -12,9 +12,9 @@ If API quotas are hit or keys are missing, PHANTOM degrades gracefully to free f
 - **Parallel Fetching**: Results are retrieved asynchronously for lightning speed.
 - **Fully Responsive UI**: Modern Next.js App Router with Radix + Tailwind CSS.
 
-## Getting Started
+## Getting Started.
 
-### 1. Installation
+### 1. Installation.
 
 Clone and install dependencies:
 
@@ -30,7 +30,7 @@ pnpm install
 
 Copy the `.env.example` file to create your own configuration:
 
-```bash
+```bash.
 cp .env.example .env.local
 ```
 
