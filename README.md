@@ -78,6 +78,6 @@ Deploying PHANTOM is seamless with Vercel using their free Hobby plan.
 - `components/` - Radix powered accessible UI components.
 - `lib/` - Internal intelligence gathering modules.
 
-## Security
+## Security ##
 
 PHANTOM includes multiple security primitives including server-side secret obfuscation, request sanitization, and IP-level route rate limiting directly integrated in the core routing components.
