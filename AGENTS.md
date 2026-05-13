@@ -2,7 +2,7 @@ IMPORTANT:
 
 This project may be using a modified or newer Next.js version with breaking changes.
 
-Do not assume:
+Do not assume this:
 - App Router works exactly like older versions
 - File structure is standard (/pages, /app, routing conventions may differ)
 - APIs such as fetch, middleware, server actions, config, or data fetching behave as expected
