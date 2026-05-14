@@ -8,7 +8,7 @@ Do not assume this:
 - APIs such as fetch, middleware, server actions, config, or data fetching behave as expected
 - Older patterns from training data are still valid
 
-Before writing or editing code:
+Before writing or editing code:.
 
 1. Read documentation inside:
    node_modules/next/dist/docs/
