@@ -1,4 +1,4 @@
-# PHANTOM — Advanced OSINT Intelligence Suite.
+# PHANTOM — Advanced OSINT Intelligence Suite..
 
 PHANTOM is a production-grade, highly-optimized Open Source Intelligence (OSINT) suite designed for speed and reliability. Built entirely on free-tier APIs, it offers a zero-cost solution for extensive reconnaissance. 
 
