@@ -3,7 +3,7 @@
 Reference:
 @AGENTS.md
 
-## Core Rules
+## Core Rules ##
 - Read AGENTS.md first before making changes.
 - Treat repository code as source of truth over model assumptions.
 - Do not invent APIs, routes, or components.
